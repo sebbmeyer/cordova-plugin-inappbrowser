@@ -756,6 +756,13 @@
 
         if (toolbarVisible) {
             // locationBar is on top of toolBar, hide locationBar
+		
+	    if (_browserOptions.toolbaroverlay) {
+                // if toolbar overlay, expand webView to screen dimensions
+                [self setWebViewFrame:self.view.bounds];
+                self.toolbar.hidden = !(_browserOptions.toolbar); // hack to trigger showToolBar
+                return;
+            }
 
             // webView take up whole height less toolBar height
             CGRect webViewBounds = self.view.bounds;
@@ -783,6 +790,17 @@
     if (show) {
         self.toolbar.hidden = NO;
         CGRect webViewBounds = self.view.bounds;
+	    
+	if (_browserOptions.toolbaroverlay) {
+            if ([toolbarPosition isEqualToString:kInAppBrowserToolbarBarPositionTop]) {
+                toolbarFrame.origin.y = 0;
+            } else {
+                toolbarFrame.origin.y = (webViewBounds.size.height - TOOLBAR_HEIGHT);
+            }
+            
+            [self setWebViewFrame:webViewBounds];
+            return;
+        }
 
         if (locationbarVisible) {
             // locationBar at the bottom, move locationBar up
@@ -1060,6 +1078,7 @@
         self.toolbartranslucent = YES;
 	self.enableToolbarToggle = NO;
         self.hidetoolbarafterstart = NO;
+        self.toolbaroverlay = NO;
         self.toolbarstyle = kInAppBrowserToolbarStyleDefault;
     }
 
