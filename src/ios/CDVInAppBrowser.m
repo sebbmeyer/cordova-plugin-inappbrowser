@@ -164,7 +164,7 @@
     }
 
     [self.inAppBrowserViewController showLocationBar:browserOptions.location];
-    [self.inAppBrowserViewController showToolBar:browserOptions.toolbar :browserOptions.toolbarposition];
+    // [self.inAppBrowserViewController showToolBar:browserOptions.toolbar :browserOptions.toolbarposition];
     if (browserOptions.closebuttoncaption != nil || browserOptions.closebuttoncolor != nil) {
         [self.inAppBrowserViewController setCloseButtonTitle:browserOptions.closebuttoncaption :browserOptions.closebuttoncolor :browserOptions.hideNavigationButtons];
     }
@@ -602,7 +602,7 @@
     self.toolbar.clearsContextBeforeDrawing = NO;
     self.toolbar.clipsToBounds = NO;
     self.toolbar.contentMode = UIViewContentModeScaleToFill;
-    self.toolbar.hidden = NO;
+    self.toolbar.hidden = YES;
     self.toolbar.multipleTouchEnabled = NO;
     self.toolbar.opaque = NO;
     self.toolbar.userInteractionEnabled = YES;
@@ -684,8 +684,13 @@
     [self.view addSubview:self.spinner];
 	
     // hide toolbar after 3 seconds after start, if option is enabled
-    if (_browserOptions.toolbar && _browserOptions.hidetoolbarafterstart) {
-        [self performSelector:@selector(toogleToolbar:) withObject:nil afterDelay:3.0];
+    if (_browserOptions.toolbar) {
+        if (_browserOptions.hidetoolbarafterstart) {
+            [self performSelector:@selector(toogleToolbar:) withObject:nil afterDelay:0.2];
+            [self performSelector:@selector(toogleToolbar:) withObject:nil afterDelay:3.0];
+        } else {
+            [self performSelector:@selector(toogleToolbar:) withObject:nil afterDelay:0.1];
+        }
     }
 }
 
