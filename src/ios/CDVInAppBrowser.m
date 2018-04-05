@@ -28,6 +28,9 @@
 #define    kInAppBrowserToolbarBarPositionBottom @"bottom"
 #define    kInAppBrowserToolbarBarPositionTop @"top"
 
+#define    kInAppBrowserToolbarStyleDefault @"default"
+#define    kInAppBrowserToolbarStyleBlack @"black"
+
 #define    TOOLBAR_HEIGHT 44.0
 #define    STATUSBAR_HEIGHT 0.0
 #define    LOCATIONBAR_HEIGHT 21.0
@@ -591,7 +594,11 @@
     self.toolbar.alpha = 1.000;
     self.toolbar.autoresizesSubviews = YES;
     self.toolbar.autoresizingMask = toolbarIsAtBottom ? (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin) : UIViewAutoresizingFlexibleWidth;
-    self.toolbar.barStyle = UIBarStyleDefault;
+    if ([_browserOptions.toolbarstyle isEqualToString:kInAppBrowserToolbarStyleBlack]) {
+        self.toolbar.barStyle = UIBarStyleBlack;
+    } else {
+        self.toolbar.barStyle = UIBarStyleDefault;
+    }
     self.toolbar.clearsContextBeforeDrawing = NO;
     self.toolbar.clipsToBounds = NO;
     self.toolbar.contentMode = UIViewContentModeScaleToFill;
@@ -1047,6 +1054,7 @@
         self.toolbarcolor = nil;
         self.toolbartranslucent = YES;
 	self.enableToolbarToggle = NO;
+        self.toolbarstyle = kInAppBrowserToolbarStyleDefault;
     }
 
     return self;
