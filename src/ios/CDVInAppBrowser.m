@@ -682,6 +682,11 @@
     [self.view addSubview:self.toolbar];
     [self.view addSubview:self.addressLabel];
     [self.view addSubview:self.spinner];
+	
+    // hide toolbar after 3 seconds after start, if option is enabled
+    if (_browserOptions.toolbar && _browserOptions.hidetoolbarafterstart) {
+        [self performSelector:@selector(toogleToolbar:) withObject:nil afterDelay:3.0];
+    }
 }
 
 - (void)toogleToolbar:(UITapGestureRecognizer *)recognizer
@@ -1054,6 +1059,7 @@
         self.toolbarcolor = nil;
         self.toolbartranslucent = YES;
 	self.enableToolbarToggle = NO;
+        self.hidetoolbarafterstart = NO;
         self.toolbarstyle = kInAppBrowserToolbarStyleDefault;
     }
 
