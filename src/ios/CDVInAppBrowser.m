@@ -662,11 +662,25 @@
       [self.toolbar setItems:@[self.backButton, fixedSpaceButton, self.forwardButton, flexibleSpaceButton, self.closeButton]];
     }
     [self.toolbar setItems:@[flexibleSpaceButton, self.closeButton]];
+	
+    // Adding tap gesture to toogle toolbar on user request
+    if (_browserOptions.enableToolbarToggle) {
+	    UITapGestureRecognizer *singleFingerTap =
+	    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(toogleToolbar:)];
+	    [self.view addGestureRecognizer:singleFingerTap];
+    }
 
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.toolbar];
     [self.view addSubview:self.addressLabel];
     [self.view addSubview:self.spinner];
+}
+
+- (void)toogleToolbar:(UITapGestureRecognizer *)recognizer
+{
+    // toogle toolbar visibility
+    [self showToolBar:self.toolbar.isHidden :kInAppBrowserToolbarBarPositionBottom]; // TODO: make position dynamic
 }
 
 - (void) setWebViewFrame : (CGRect) frame {
@@ -1032,6 +1046,7 @@
         self.closebuttoncolor = nil;
         self.toolbarcolor = nil;
         self.toolbartranslucent = YES;
+	self.enableToolbarToggle = NO;
     }
 
     return self;
