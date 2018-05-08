@@ -714,7 +714,17 @@
     self.closeButton = title != nil ? [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleBordered target:self action:@selector(close)] : [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
     self.closeButton.enabled = YES;
     // If color on closebutton is requested then initialize with that that color, otherwise use initialize with default
-    self.closeButton.tintColor = colorString != nil ? [self colorFromHexString:colorString] : [UIColor colorWithRed:60.0 / 255.0 green:136.0 / 255.0 blue:230.0 / 255.0 alpha:1];
+    // self.closeButton.tintColor = colorString != nil ? [self colorFromHexString:colorString] : [UIColor colorWithRed:60.0 / 255.0 green:136.0 / 255.0 blue:230.0 / 255.0 alpha:1];
+	
+    UIColor *grey = UIColorFromRGB(0xDDDDDD);
+    self.closeButton.tintColor = grey;
+    
+    NSUInteger fontSize = 32;
+    // UIFont *font = [UIFont boldSystemFontOfSize:fontSize];
+    UIFont *font = [UIFont fontWithName:@"ArialRoundedMTBold" size:fontSize];
+    NSDictionary *attributes = @{NSFontAttributeName: font};
+    [self.closeButton setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    [self.closeButton setTitleTextAttributes:attributes forState:UIControlStateHighlighted];
 
     int index = (hideNavigationButtons) ? 1 : 4;
     NSMutableArray* items = [self.toolbar.items mutableCopy];
