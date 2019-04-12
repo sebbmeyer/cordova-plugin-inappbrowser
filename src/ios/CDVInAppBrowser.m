@@ -671,7 +671,7 @@
     [self.toolbar setItems:@[flexibleSpaceButton, self.closeButton]];
 	
     // Adding tap gesture to toogle toolbar on user request
-    if (_browserOptions.enableToolbarToggle) {
+    if (_browserOptions.enabletoolbartoggle) {
 	    UITapGestureRecognizer *singleFingerTap =
 	    [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(toogleToolbar:)];
@@ -1091,7 +1091,7 @@
         self.closebuttoncolor = nil;
         self.toolbarcolor = nil;
         self.toolbartranslucent = YES;
-	self.enableToolbarToggle = NO;
+	self.enabletoolbartoggle = NO;
         self.hidetoolbarafterstart = NO;
         self.toolbaroverlay = NO;
         self.toolbarstyle = kInAppBrowserToolbarStyleDefault;
