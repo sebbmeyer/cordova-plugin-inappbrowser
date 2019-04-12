@@ -70,7 +70,7 @@
 @property (nonatomic, assign) BOOL suppressesincrementalrendering;
 @property (nonatomic, assign) BOOL hidden;
 @property (nonatomic, assign) BOOL disallowoverscroll;
-@property (nonatomic, assign) BOOL enableToolbarToggle;
+@property (nonatomic, assign) BOOL enabletoolbartoggle;
 @property (nonatomic, assign) BOOL hidetoolbarafterstart;
 @property (nonatomic, assign) BOOL toolbaroverlay;
 
